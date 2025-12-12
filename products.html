@@ -488,52 +488,49 @@
 }
 
 
-
-     .holiday-banner{
-  text-align:center;
-  padding:5px 2px;
-  background:linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
-  color:white;
-  position:relative;
-  overflow:hidden;
-  border-radius:0px;
+/* Popup overlay */
+.holiday-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
 }
 
-/* Heading fonts */
-.holiday-banner h1{
-  font-size:48px;
-  margin-bottom:0px;
-  color: coral;
-}
-.holiday-banner h2{
-  font-size:34px;
-  margin-bottom:20px;
-}
-.holiday-banner p{
-  font-size:20px;
-  opacity:0.9;
-  color: coral;
+/* Popup card */
+.holiday-box {
+    background: linear-gradient(135deg, #ff3b3b, #ffb300);
+    padding: 30px 25px;
+    max-width: 420px;
+    width: 90%;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    animation: slideDown 0.6s ease forwards;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
-/* Snow animation */
-.snow{
-  position:absolute;
-  top:0; left:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  background-image:
-    radial-gradient(white 2px, transparent 2px),
-    radial-gradient(white 2px, transparent 2px),
-    radial-gradient(white 2px, transparent 2px);
-  background-size:20px 20px, 25px 25px, 15px 15px;
-  animation:snowFall 10s linear infinite;
+/* Close button */
+.holiday-close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: -10px;
+    color: white;
 }
 
-@keyframes snowFall{
-  0%{background-position:0 0,0 0,0 0;}
-  100%{background-position:0 600px,0 500px,0 400px;}
+/* Animation */
+@keyframes slideDown {
+    0% { transform: translateY(-60px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
 }
+
+
+    
   </style>
 </head>
 <body>
@@ -563,12 +560,16 @@
   </header>
   
 
-  <section class="holiday-banner">
-  <div class="snow"></div>
-  <h1>Merry Christmas 🎄</h1>
-  <h2>and a Happy New Year 2026 ✨</h2>
-  <p>We wish you joy, peace and success!</p>
-</section>
+ <div id="holidayPopup" class="holiday-popup">
+    <div class="holiday-box">
+        <span class="holiday-close" id="holidayClose">&times;</span>
+
+        <h2>🌟 Merry Christmas!</h2>
+        <p>May your holidays be filled with joy, peace, and blessings.</p>
+        <h3>🎉 Happy New Year 2026 🎉</h3>
+    </div>
+</div>
+ 
 
 <button id="backToTop" title="Back to top">↑</button>
 
@@ -791,6 +792,29 @@ backToTopBtn.addEventListener("click", () => {
     behavior: "smooth"
   });
 });
+
+
+
+window.addEventListener("load", () => {
+    const popup = document.getElementById("holidayPopup");
+    const close = document.getElementById("holidayClose");
+
+    // Show popup after 1.2 seconds
+    setTimeout(() => {
+        popup.style.display = "flex";
+    }, 1200);
+
+    // Close button
+    close.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
+
+    // Close when clicking outside the box
+    window.addEventListener("click", (e) => {
+        if (e.target === popup) popup.style.display = "none";
+    });
+});
+
 
   </script>
 </body>
