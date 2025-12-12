@@ -462,6 +462,81 @@
         padding: 0;
       }
     }
+
+
+    #backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: orange;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: none; /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s;
+}
+
+#backToTop:hover {
+  background-color: #ff8800; /* darker orange */
+}
+
+
+
+
+
+     .holiday-banner{
+  text-align:center;
+  padding:5px 2px;
+  background:linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+  color:white;
+  position:relative;
+  overflow:hidden;
+  border-radius:0px;
+}
+
+/* Heading fonts */
+.holiday-banner h1{
+  font-size:48px;
+  margin-bottom:0px;
+  color: coral;
+}
+.holiday-banner h2{
+  font-size:34px;
+  margin-bottom:20px;
+}
+.holiday-banner p{
+  font-size:20px;
+  opacity:0.9;
+  color: coral;
+}
+
+/* Snow animation */
+.snow{
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  background-image:
+    radial-gradient(white 2px, transparent 2px),
+    radial-gradient(white 2px, transparent 2px),
+    radial-gradient(white 2px, transparent 2px);
+  background-size:20px 20px, 25px 25px, 15px 15px;
+  animation:snowFall 10s linear infinite;
+}
+
+@keyframes snowFall{
+  0%{background-position:0 0,0 0,0 0;}
+  100%{background-position:0 600px,0 500px,0 400px;}
+}
 </style>
 <body>
   <header class="site-header" style="padding: px 20px;">
@@ -485,6 +560,14 @@
     </div>
   </header>
   
+  <section class="holiday-banner">
+  <div class="snow"></div>
+  <h1>Merry Christmas 🎄</h1>
+  <h2>and a Happy New Year 2026 ✨</h2>
+  <p>We wish you joy, peace and success!</p>
+</section>
+<button id="backToTop" title="Back to top">↑</button>
+
  <section class="hero hero--cover" role="banner" style="padding: 20px 30px; background-image: url(./assets/electrical\ 4.jpeg) ; font-weight: bolder;">
     <div class="hero__bg" style=""></div>
     <div class="container hero__content"><br><br><br>
@@ -507,7 +590,7 @@
 
   <section class="section">
     <div class="container split">
-      <form class="form card" action="mailto:miriamuwiringiye@gmail.com?subject=Website%20Inquiry" method="post" enctype="text/plain">
+      <form class="form card" action="mailto:contact@msesltd.com?subject=Website%20Inquiry" method="post" enctype="text/plain">
         <div class="form__row">
           <div class="form__field">
             <label for="name">Full Name</label>
@@ -525,7 +608,7 @@
           </div>
         </div>
         <button class="btn btn--primary" type="submit">Send Message</button>
-        <p class="mt-12 small muted">Tip: If your email app doesn't open, you can write directly to <strong>msesltd@gmail.com</strong>.</p>
+        <p class="mt-12 small muted">Tip: If your email app doesn't open, you can write directly to <strong>contact@msesltd.com</strong>.</p>
       </form>
 
       <aside>
@@ -574,6 +657,25 @@
         navLinks.classList.remove('active');
       });
     });
+
+
+    const backToTopBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    backToTopBtn.style.display = "flex";
+  } else {
+    backToTopBtn.style.display = "none";
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
   </script>
 </body>
 </html>
